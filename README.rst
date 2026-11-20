@@ -27,3 +27,31 @@ A library for distributed computation.  See documentation_ for more details.
    :target: https://pypi.python.org/pypi/distributed/
 .. |NumFOCUS| image:: https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A
    :target: https://www.numfocus.org/
+
+Quickstart
+----------
+
+Install Dask with its distributed components:
+
+.. code-block:: bash
+
+   python -m pip install "dask[distributed]"
+
+Create a local cluster and connect a client:
+
+.. code-block:: python
+
+   from distributed import Client, LocalCluster
+
+   cluster = LocalCluster()
+   client = Client(cluster)
+
+   future = client.submit(sum, [1, 2, 3])
+   print(future.result())  # 6
+
+   client.close()
+   cluster.close()
+
+The client can submit Python functions to workers and retrieve their results.
+See the `Distributed documentation <https://distributed.dask.org/>`_ for
+more examples and configuration options.
